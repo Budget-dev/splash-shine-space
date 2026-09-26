@@ -6,14 +6,9 @@ export function Splash() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    if (sessionStorage.getItem("g8-splash")) {
-      setShow(false);
-      return;
-    }
     const t = setTimeout(() => {
       setShow(false);
-      sessionStorage.setItem("g8-splash", "1");
-    }, 2800);
+    }, 2400);
     return () => clearTimeout(t);
   }, []);
 
@@ -32,9 +27,17 @@ export function Splash() {
             transition={{ duration: 1.4 }}
           />
           <div className="relative">
-            <svg viewBox="0 0 200 200" className="absolute -inset-10 h-[calc(100%+5rem)] w-[calc(100%+5rem)]">
+            <svg
+              viewBox="0 0 200 200"
+              className="absolute -inset-10 h-[calc(100%+5rem)] w-[calc(100%+5rem)]"
+            >
               <motion.circle
-                cx="100" cy="100" r="92" fill="none" stroke="var(--gold)" strokeWidth="1.5"
+                cx="100"
+                cy="100"
+                r="92"
+                fill="none"
+                stroke="var(--gold)"
+                strokeWidth="1.5"
                 initial={{ pathLength: 0, rotate: -90 }}
                 animate={{ pathLength: 1 }}
                 transition={{ duration: 1.6, ease: "easeInOut" }}

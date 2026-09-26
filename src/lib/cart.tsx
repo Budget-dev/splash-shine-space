@@ -23,7 +23,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const s = localStorage.getItem("g8-cart");
       if (s) setRaw(JSON.parse(s));
-    } catch {}
+    } catch {
+      // Ignore localStorage parse errors
+    }
   }, []);
   useEffect(() => {
     localStorage.setItem("g8-cart", JSON.stringify(raw));
@@ -35,12 +37,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
   });
 
   const setQty = (id: string, qty: number) =>
-    setRaw((r) => (qty <= 0 ? r.filter((l) => l.id !== id) : r.map((l) => (l.id === id ? { ...l, qty } : l))));
+    setRaw((r) =>
+      qty <= 0 ? r.filter((l) => l.id !== id) : r.map((l) => (l.id === id ? { ...l, qty } : l)),
+    );
 
   const add = (id: string, qty = 1) => {
     setRaw((r) => {
       const ex = r.find((l) => l.id === id);
-      return ex ? r.map((l) => (l.id === id ? { ...l, qty: l.qty + qty } : l)) : [...r, { id, qty }];
+      return ex
+        ? r.map((l) => (l.id === id ? { ...l, qty: l.qty + qty } : l))
+        : [...r, { id, qty }];
     });
     setOpen(true);
   };

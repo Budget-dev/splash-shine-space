@@ -88,13 +88,20 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
 }
 
 @utility text-gold-gradient {
@@ -103,10 +110,18 @@
   background-clip: text;
   color: transparent;
 }
-@utility bg-gold-gradient { background: var(--gradient-gold); }
-@utility bg-forest-gradient { background: var(--gradient-forest); }
-@utility shadow-soft { box-shadow: var(--shadow-soft); }
-@utility shadow-gold { box-shadow: var(--shadow-gold); }
+@utility bg-gold-gradient {
+  background: var(--gradient-gold);
+}
+@utility bg-forest-gradient {
+  background: var(--gradient-forest);
+}
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+@utility shadow-gold {
+  box-shadow: var(--shadow-gold);
+}
 
 @utility shimmer {
   position: relative;
@@ -121,10 +136,16 @@
   }
 }
 
-@keyframes shimmer { to { transform: translateX(100%); } }
+@keyframes shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

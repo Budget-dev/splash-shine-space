@@ -1,8 +1,6 @@
 # Sparkling Showcase
 
-build the website mainly same images and need to be good and side bar and efry image looks ro be good and miantain logo consittency and user framer motionm adn shade ui compoents and if u need take from the 21dev.com and uiverse.io and but i need good same as in the image abnd it thier own scentfually tested profduct 
-
-
+build the website mainly same images and need to be good and side bar and efry image looks ro be good and miantain logo consittency and user framer motionm adn shade ui compoents and if u need take from the 21dev.com and uiverse.io and but i need good same as in the image abnd it thier own scentfually tested profduct
 
 main most important the mobile banner with cta tobe good animation adn mainluy i need the splash screen which give from the first logo adn need to be good and ecommerce
 

@@ -36,15 +36,36 @@ export function CartSheet() {
             <div className="flex-1 space-y-3 overflow-y-auto px-4">
               {lines.map((l) => (
                 <div key={l.id} className="flex gap-3 rounded-xl bg-card p-3 shadow-soft">
-                  <img src={l.product.image} alt={l.product.name} className="h-20 w-20 rounded-lg object-cover" />
+                  <img
+                    src={l.product.image}
+                    alt={l.product.name}
+                    className="h-20 w-20 rounded-lg object-cover"
+                  />
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-display text-lg">{l.product.name}</p>
-                    <p className="text-sm text-muted-foreground">{inr(l.product.price)} · {l.product.size}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {inr(l.product.price)} · {l.product.size}
+                    </p>
                     <div className="mt-2 flex items-center gap-2">
-                      <button onClick={() => setQty(l.id, l.qty - 1)} className="rounded-full border p-1"><Minus className="h-3 w-3" /></button>
+                      <button
+                        onClick={() => setQty(l.id, l.qty - 1)}
+                        className="rounded-full border p-1"
+                      >
+                        <Minus className="h-3 w-3" />
+                      </button>
                       <span className="w-6 text-center text-sm">{l.qty}</span>
-                      <button onClick={() => setQty(l.id, l.qty + 1)} className="rounded-full border p-1"><Plus className="h-3 w-3" /></button>
-                      <button onClick={() => setQty(l.id, 0)} className="ml-auto text-muted-foreground hover:text-destructive"><Trash2 className="h-4 w-4" /></button>
+                      <button
+                        onClick={() => setQty(l.id, l.qty + 1)}
+                        className="rounded-full border p-1"
+                      >
+                        <Plus className="h-3 w-3" />
+                      </button>
+                      <button
+                        onClick={() => setQty(l.id, 0)}
+                        className="ml-auto text-muted-foreground hover:text-destructive"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -52,13 +73,19 @@ export function CartSheet() {
             </div>
             <div className="border-t p-4">
               <div className="mb-1 flex justify-between text-sm text-muted-foreground">
-                <span>Shipping</span><span>{total >= 499 ? "Free" : inr(49)}</span>
+                <span>Shipping</span>
+                <span>{total >= 499 ? "Free" : inr(49)}</span>
               </div>
               <div className="mb-4 flex justify-between font-display text-xl">
-                <span>Total</span><span>{inr(total + (total >= 499 ? 0 : 49))}</span>
+                <span>Total</span>
+                <span>{inr(total + (total >= 499 ? 0 : 49))}</span>
               </div>
-              <Button onClick={checkout} className="h-12 w-full rounded-full text-base">Checkout via WhatsApp</Button>
-              <p className="mt-2 text-center text-xs text-muted-foreground">Cash on Delivery available</p>
+              <Button onClick={checkout} className="h-12 w-full rounded-full text-base">
+                Checkout via WhatsApp
+              </Button>
+              <p className="mt-2 text-center text-xs text-muted-foreground">
+                Cash on Delivery available
+              </p>
             </div>
           </>
         )}

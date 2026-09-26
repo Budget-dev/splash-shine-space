@@ -84,13 +84,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Green8 Naturals — Pure Moringa Products" },
-      { name: "description", content: "Lab-tested moringa powder, tea and capsules from Green8 Naturals." },
+      {
+        name: "description",
+        content: "Lab-tested moringa powder, tea and capsules from Green8 Naturals.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "stylesheet",
