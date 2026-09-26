@@ -1,183 +1,259 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, FlaskConical, HeartPulse, Leaf, ShieldCheck, Sparkles, Truck, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  Award,
+  CheckCircle2,
+  FlaskConical,
+  Headphones,
+  Heart,
+  Leaf,
+  Mail,
+  PackageCheck,
+  RotateCcw,
+  ShieldCheck,
+  ShoppingCart,
+  Sparkles,
+  Sprout,
+  Truck,
+  type LucideIcon,
+} from "lucide-react";
 import hero from "@/assets/hero.jpg";
-import farmer from "@/assets/farmer.jpg";
+import powder from "@/assets/p-powder.jpg";
+import tea from "@/assets/p-tea.jpg";
+import caps from "@/assets/p-caps.jpg";
+import leaves from "@/assets/moringa-leaves.jpg";
+import teaLifestyle from "@/assets/lifestyle-tea.jpg";
+import yogaLifestyle from "@/assets/lifestyle-yoga.jpg";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ProductCard } from "@/components/ProductCard";
 import { products } from "@/lib/products";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Green8 Naturals — Pure Moringa, Lab Tested" },
-      { name: "description", content: "Shop our own scientifically tested moringa powder, tea and capsules. Free shipping above ₹499, COD available." },
-      { property: "og:title", content: "Green8 Naturals — Pure Moringa, Lab Tested" },
-      { property: "og:description", content: "Our own scientifically tested moringa products. Pure Nature, Infinite Wellness." },
+      { title: "Green8 Naturals — Pure Moringa Wellness" },
+      { name: "description", content: "Shop Green8 Naturals moringa powder, herbal tea and capsules, made for everyday natural wellness." },
+      { property: "og:title", content: "Green8 Naturals — Pure Moringa Wellness" },
+      { property: "og:description", content: "Pure, carefully tested moringa products for everyday wellness." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
 });
 
-const words = ["Pure", "Nature.", "Infinite", "Wellness."];
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.6 },
+};
+
+const categories = [
+  { name: "Moringa Powder", image: powder, id: "moringa-powder" },
+  { name: "Moringa Tea", image: tea, id: "moringa-tea" },
+  { name: "Daily Wellness", image: caps, id: "moringa-capsules" },
+] as const;
+
+const heroTrust: Array<{ icon: LucideIcon; label: string }> = [
+  { icon: Leaf, label: "100% Natural" },
+  { icon: FlaskConical, label: "Lab Tested" },
+  { icon: ShieldCheck, label: "Secure Checkout" },
+];
+
+const benefits: Array<{ icon: LucideIcon; label: string }> = [
+  { icon: Sprout, label: "Rich in Nutrients" },
+  { icon: Leaf, label: "Natural Ingredients" },
+  { icon: Sparkles, label: "Daily Wellness" },
+  { icon: Heart, label: "Detox & Cleanse" },
+];
+
+const values: Array<{ icon: LucideIcon; title: string; copy: string }> = [
+  { icon: Leaf, title: "Responsibly Sourced", copy: "Selected from trusted farms" },
+  { icon: Award, title: "Premium Quality", copy: "Carefully processed for nutrition" },
+  { icon: Sprout, title: "Fresh & Natural", copy: "No artificial additives" },
+  { icon: CheckCircle2, title: "Transparent Ingredients", copy: "What you see is what you get" },
+];
+
+const serviceBenefits: Array<{ icon: LucideIcon; label: string }> = [
+  { icon: Truck, label: "Free Shipping" },
+  { icon: ShieldCheck, label: "Secure Payments" },
+  { icon: Headphones, label: "Easy Support" },
+  { icon: RotateCcw, label: "Easy Returns" },
+];
 
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="relative isolate min-h-[660px] overflow-hidden md:min-h-[700px]">
       <motion.img
         src={hero}
-        alt="Moringa powder and moringa tea"
+        alt="Green8 Naturals moringa powder and tea surrounded by fresh moringa leaves"
         width={1920}
         height={1024}
-        className="absolute inset-0 -z-10 h-full w-full object-cover object-[70%_center]"
-        initial={{ scale: 1.2 }}
+        className="absolute inset-0 -z-20 h-full w-full object-cover object-[67%_center]"
+        initial={{ scale: 1.08 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 2.4, ease: "easeOut" }}
+        transition={{ duration: 2, ease: "easeOut" }}
       />
-      <div className="absolute inset-0 -z-10 bg-linear-to-t from-forest via-forest/60 to-forest/10 md:bg-linear-to-r md:from-background md:via-background/80 md:to-transparent" />
-
-      {[0, 1, 2, 3].map((i) => (
-        <motion.div
-          key={i}
-          className="absolute text-leaf/70"
-          style={{ left: `${15 + i * 22}%`, top: -40 }}
-          animate={{ y: ["0vh", "110vh"], rotate: [0, 360], x: [0, 30, -20, 0] }}
-          transition={{ duration: 9 + i * 2, repeat: Infinity, delay: i * 1.8, ease: "linear" }}
-        >
-          <Leaf className="h-5 w-5" />
+      <div className="absolute inset-0 -z-10 bg-linear-to-b from-background/90 via-background/60 to-transparent md:bg-linear-to-r md:from-background md:via-background/75 md:to-transparent" />
+      <div className="mx-auto flex min-h-[660px] max-w-7xl flex-col px-5 pb-8 pt-14 md:min-h-[700px] md:justify-center md:pb-16 md:pt-8">
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} className="max-w-xl">
+          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+            <Leaf className="h-4 w-4 fill-leaf text-leaf" /> Pure nature
+          </p>
+          <h1 className="text-[3.2rem] leading-[0.97] text-foreground sm:text-6xl md:text-7xl">
+            Infinite <span className="text-gold-gradient">Wellness.</span>
+          </h1>
+          <p className="mt-4 max-w-sm text-base leading-relaxed text-foreground/80 md:text-lg">
+            Discover the goodness of moringa and nature’s finest herbs for a healthier, happier you.
+          </p>
+          <div className="mt-6 grid max-w-sm grid-cols-2 gap-3">
+            <Button asChild className="h-12 rounded-md px-4 text-sm shadow-soft">
+              <Link to="/shop">Shop Moringa <ArrowRight /></Link>
+            </Button>
+            <Button asChild variant="outline" className="h-12 rounded-md border-primary bg-background/75 px-4 text-sm text-primary backdrop-blur">
+              <Link to="/about">Explore Wellness</Link>
+            </Button>
+          </div>
+          <div className="mt-6 grid max-w-md grid-cols-3 gap-2 text-center text-[11px] font-medium sm:text-xs">
+            {heroTrust.map(({ icon: Icon, label }) => (
+              <div key={label} className="flex flex-col items-center gap-1.5 sm:flex-row sm:text-left">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-primary bg-background/80 text-primary"><Icon className="h-5 w-5" /></span>
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
         </motion.div>
-      ))}
-
-      <div className="mx-auto flex min-h-[88svh] max-w-7xl flex-col justify-end px-5 pb-12 pt-24 md:min-h-[640px] md:justify-center md:pb-16">
-        <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-background/90 px-3 py-1.5 text-xs font-medium text-primary shadow-soft"
-        >
-          <FlaskConical className="h-3.5 w-3.5 text-gold" /> Our own scientifically tested products
-        </motion.span>
-        <h1 className="max-w-2xl text-5xl font-bold leading-[1.02] text-primary-foreground sm:text-6xl md:text-7xl md:text-foreground">
-          {words.map((w, i) => (
-            <motion.span
-              key={w}
-              className={`mr-3 inline-block ${i % 2 === 1 ? "text-gold-gradient" : ""}`}
-              initial={{ opacity: 0, y: 40, rotateX: -60 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ delay: 0.5 + i * 0.15, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-            >
-              {w}
-            </motion.span>
-          ))}
-        </h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="mt-4 max-w-md text-base text-primary-foreground/85 md:text-lg md:text-muted-foreground"
-        >
-          Farm-fresh moringa powder, tea and capsules — lab tested, no additives, delivered across India.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4 }}
-          className="mt-7 flex flex-col gap-3 sm:flex-row"
-        >
-          <Link to="/shop" className="shimmer group relative inline-flex h-14 items-center justify-center gap-2 rounded-full bg-gold-gradient px-8 text-base font-semibold text-gold-foreground shadow-gold">
-            <motion.span
-              className="absolute inset-0 rounded-full border-2 border-gold"
-              animate={{ scale: [1, 1.12], opacity: [0.8, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity }}
-            />
-            Shop Now <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </Link>
-          <a href="https://wa.me/918331851456" className="inline-flex h-14 items-center justify-center rounded-full border border-primary-foreground/40 bg-background/10 px-8 text-base font-medium text-primary-foreground backdrop-blur md:border-primary md:text-primary">
-            Order on WhatsApp
-          </a>
-        </motion.div>
+      </div>
+      <div className="absolute inset-x-0 bottom-0 flex justify-center gap-1.5 pb-3">
+        <span className="h-2 w-2 rounded-full bg-primary" /><span className="h-2 w-2 rounded-full bg-background/70" /><span className="h-2 w-2 rounded-full bg-background/70" />
       </div>
     </section>
   );
 }
 
-const badges = [
-  { icon: Leaf, label: "100% Natural" },
-  { icon: FlaskConical, label: "Lab Tested" },
-  { icon: ShieldCheck, label: "Boosts Immunity" },
-  { icon: Zap, label: "Energy Booster" },
-  { icon: HeartPulse, label: "Detox & Cleanse" },
-  { icon: Truck, label: "PAN India Delivery" },
-];
+function SectionTitle({ children, link = "/shop" }: { children: string; link?: "/shop" | "/about" }) {
+  return (
+    <div className="mb-5 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
+      <h2 className="min-w-0 text-2xl sm:text-3xl">{children}</h2>
+      <Link to={link} className="flex shrink-0 items-center gap-1 text-xs font-semibold text-primary sm:text-sm">View all <ArrowRight className="h-3.5 w-3.5" /></Link>
+    </div>
+  );
+}
 
 function Index() {
   return (
     <>
       <Hero />
 
-      <section className="overflow-hidden border-y bg-cream py-5">
-        <motion.div
-          className="flex w-max gap-10"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        >
-          {[...badges, ...badges].map((b, i) => (
-            <div key={i} className="flex items-center gap-3 whitespace-nowrap">
-              <span className="grid h-10 w-10 place-items-center rounded-full border-2 border-primary text-primary"><b.icon className="h-5 w-5" /></span>
-              <span className="font-medium">{b.label}</span>
-            </div>
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-5 md:py-16">
+        <SectionTitle>Shop by Category</SectionTitle>
+        <div className="grid grid-cols-3 gap-2.5 sm:gap-5">
+          {categories.map((category, i) => (
+            <motion.div key={category.name} {...reveal} transition={{ duration: 0.5, delay: i * 0.08 }}>
+              <Link to="/product/$id" params={{ id: category.id }} className="group block overflow-hidden rounded-md border bg-card shadow-soft">
+                <div className="aspect-[1/0.88] overflow-hidden bg-cream">
+                  <img src={category.image} alt={category.name} loading="lazy" width={1024} height={1024} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div className="grid min-h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-1 px-2.5 py-2">
+                  <span className="min-w-0 text-xs font-semibold leading-tight sm:text-base">{category.name}</span>
+                  <ArrowRight className="h-3.5 w-3.5 shrink-0 text-primary" />
+                </div>
+              </Link>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-16">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <div>
-            <p className="font-script text-2xl text-gold">Bestsellers</p>
-            <h2 className="text-3xl md:text-4xl">Our Moringa Range</h2>
-          </div>
-          <Link to="/shop" className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex">View all <ArrowRight className="h-4 w-4" /></Link>
-        </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="mx-auto max-w-7xl px-4 pb-10 sm:px-5 md:pb-16">
+        <SectionTitle>Shop Bestsellers</SectionTitle>
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
           {products.map((p, i) => <ProductCard key={p.id} p={p} i={i} />)}
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-16 md:grid-cols-2">
-        <motion.img
-          src={farmer}
-          alt="Farmer harvesting moringa"
-          loading="lazy"
-          width={1280}
-          height={960}
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="aspect-[4/3] w-full rounded-3xl object-cover shadow-soft"
-        />
-        <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-          <p className="font-script text-2xl text-gold">From farm to home</p>
-          <h2 className="text-3xl md:text-4xl">Grown with care, tested with science</h2>
-          <p className="mt-4 text-muted-foreground">
-            We source moringa from trusted local farms, process it hygienically to preserve nutrients, and test every batch in the lab for purity and safety — so every product you receive is genuinely ours and genuinely pure.
-          </p>
-          <div className="mt-6 grid grid-cols-3 gap-4 text-center">
-            {[["10K+", "Happy customers"], ["100%", "Natural"], ["3+", "Years of trust"]].map(([n, l]) => (
-              <div key={l} className="rounded-2xl bg-secondary p-4">
-                <p className="font-display text-2xl text-primary">{n}</p>
-                <p className="text-xs text-muted-foreground">{l}</p>
+      <section className="relative isolate overflow-hidden bg-forest py-12 text-primary-foreground md:py-20">
+        <img src={leaves} alt="Fresh moringa leaves" loading="lazy" width={1536} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover object-center opacity-60" />
+        <div className="absolute inset-0 -z-10 bg-linear-to-r from-forest via-forest/90 to-forest/20" />
+        <motion.div {...reveal} className="mx-auto max-w-7xl px-6">
+          <h2 className="max-w-xs text-4xl leading-none">The Power<br />of Moringa</h2>
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-primary-foreground/85 sm:text-base">A natural source of essential nutrients and plant compounds, moringa supports your everyday wellness journey.</p>
+          <Button asChild variant="secondary" className="mt-6 h-11 rounded-md bg-background px-5 text-primary">
+            <Link to="/about">Learn More <ArrowRight /></Link>
+          </Button>
+          <div className="mt-9 grid max-w-lg grid-cols-4 gap-2">
+            {benefits.map(({ icon: Icon, label }) => (
+              <div key={label} className="text-center text-[10px] leading-tight sm:text-xs">
+                <span className="mx-auto mb-2 grid h-11 w-11 place-items-center rounded-full bg-background text-primary"><Icon className="h-5 w-5" /></span>
+                {label}
               </div>
             ))}
           </div>
-          <Link to="/about" className="mt-6 inline-flex items-center gap-2 font-medium text-primary">Our story <ArrowRight className="h-4 w-4" /></Link>
         </motion.div>
       </section>
 
-      <section className="px-5 pb-16">
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-forest-gradient px-6 py-12 text-center text-primary-foreground md:py-16">
-          <Sparkles className="mx-auto h-8 w-8 text-gold" />
-          <h2 className="mt-3 text-3xl md:text-4xl">Healthy Today, <span className="text-gold-gradient">Better Tomorrow</span></h2>
-          <p className="mx-auto mt-3 max-w-md text-primary-foreground/75">Call or WhatsApp us to order: 8331851456 · 9848493098</p>
-          <Link to="/shop" className="shimmer mt-6 inline-flex h-12 items-center gap-2 rounded-full bg-gold-gradient px-8 font-semibold text-gold-foreground">Start Shopping <ArrowRight className="h-4 w-4" /></Link>
+      <section className="bg-cream px-4 py-12 sm:px-5 md:py-20">
+        <motion.div {...reveal} className="mx-auto max-w-7xl text-center">
+          <h2 className="text-3xl">Why Green8 Naturals</h2>
+          <p className="mt-1 text-sm text-muted-foreground">Pure ingredients. Trusted quality. A healthier tomorrow.</p>
+          <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-7 md:grid-cols-4">
+            {values.map(({ icon: Icon, title, copy }) => (
+              <div key={title} className="flex gap-3 text-left md:flex-col md:items-center md:text-center">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold text-gold"><Icon className="h-5 w-5" /></span>
+                <div><h3 className="font-sans text-sm font-semibold">{title}</h3><p className="mt-1 text-xs leading-relaxed text-muted-foreground">{copy}</p></div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-5 md:py-20">
+        <div className="text-center"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Real people. Real wellness.</p><h2 className="mt-1 text-3xl">Our Natural Lifestyle</h2><p className="text-sm text-muted-foreground">Bring wellness into your everyday.</p></div>
+        <div className="mt-7 grid grid-cols-2 gap-2.5 md:grid-cols-4">
+          <img src={teaLifestyle} alt="Woman enjoying moringa tea" loading="lazy" width={1024} height={1280} className="aspect-[4/5] w-full rounded-md object-cover" />
+          <img src={powder} alt="Green8 Naturals moringa powder" loading="lazy" width={1024} height={1024} className="aspect-[4/5] w-full rounded-md object-cover" />
+          <img src={yogaLifestyle} alt="Woman meditating at sunrise" loading="lazy" width={1024} height={1280} className="aspect-[4/5] w-full rounded-md object-cover" />
+          <img src={tea} alt="Green8 Naturals moringa tea" loading="lazy" width={1024} height={1024} className="aspect-[4/5] w-full rounded-md object-cover" />
+        </div>
+      </section>
+
+      <section className="bg-cream px-4 py-12 sm:px-5 md:py-20">
+        <motion.div {...reveal} className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl">What Our Customers Say</h2>
+          <div className="mt-6 rounded-md border bg-card p-6 text-left shadow-soft sm:p-8">
+            <div className="flex items-center gap-4">
+              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-secondary text-xl font-semibold text-primary">PS</div>
+              <div className="min-w-0"><div className="text-gold">★★★★★</div><p className="font-semibold">Priya S.</p><p className="text-xs text-muted-foreground">Hyderabad</p></div>
+            </div>
+            <p className="mt-5 text-base leading-relaxed text-foreground/80">“The moringa powder quality is excellent. I feel more energetic and focused throughout the day.”</p>
+          </div>
+          <div className="mt-4 flex justify-center gap-1.5"><span className="h-2 w-2 rounded-full bg-primary" /><span className="h-2 w-2 rounded-full bg-border" /><span className="h-2 w-2 rounded-full bg-border" /></div>
+        </motion.div>
+      </section>
+
+      <section className="relative isolate min-h-[320px] overflow-hidden py-12 text-primary-foreground md:min-h-[400px] md:py-20">
+        <img src={hero} alt="A fresh cup of moringa tea" loading="lazy" width={1920} height={1024} className="absolute inset-0 -z-20 h-full w-full object-cover object-[72%_center]" />
+        <div className="absolute inset-0 -z-10 bg-linear-to-r from-forest via-forest/90 to-transparent" />
+        <div className="mx-auto max-w-7xl px-6"><h2 className="max-w-xs text-4xl leading-none">Natural Goodness for a Healthier You</h2><Button asChild variant="secondary" className="mt-7 h-11 rounded-md bg-background px-5 text-primary"><Link to="/shop">Shop Now <ArrowRight /></Link></Button></div>
+      </section>
+
+      <section className="bg-primary px-5 py-10 text-primary-foreground">
+        <div className="mx-auto max-w-xl text-center">
+          <h2 className="font-sans text-lg font-medium">Subscribe for exclusive offers, wellness tips and new product launches.</h2>
+          <form className="mt-5 flex flex-col gap-3 sm:flex-row" onSubmit={(event) => event.preventDefault()}>
+            <label className="relative flex-1"><Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><span className="sr-only">Email address</span><Input type="email" placeholder="Enter your email address" className="h-12 rounded-md bg-background pl-10 text-foreground" /></label>
+            <Button type="submit" variant="outline" className="h-12 rounded-md border-primary-foreground/50 bg-primary text-primary-foreground sm:px-8">Subscribe <ArrowRight /></Button>
+          </form>
+        </div>
+      </section>
+
+      <section className="bg-background px-4 py-9 sm:px-5">
+        <div className="mx-auto grid max-w-3xl grid-cols-4 gap-2 text-center text-[10px] font-semibold sm:text-sm">
+          {serviceBenefits.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex flex-col items-center gap-2"><Icon className="h-7 w-7 text-primary" /><span>{label}</span></div>
+          ))}
         </div>
       </section>
     </>
