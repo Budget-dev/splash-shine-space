@@ -16,6 +16,7 @@ import {
   Sparkles,
   Sprout,
   Truck,
+  type LucideIcon,
 } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import powder from "@/assets/p-powder.jpg";
@@ -51,10 +52,37 @@ const reveal = {
 };
 
 const categories = [
-  { name: "Moringa Powder", image: powder, to: "/product/moringa-powder" },
-  { name: "Moringa Tea", image: tea, to: "/product/moringa-tea" },
-  { name: "Daily Wellness", image: caps, to: "/product/moringa-capsules" },
+  { name: "Moringa Powder", image: powder, id: "moringa-powder" },
+  { name: "Moringa Tea", image: tea, id: "moringa-tea" },
+  { name: "Daily Wellness", image: caps, id: "moringa-capsules" },
 ] as const;
+
+const heroTrust: Array<{ icon: LucideIcon; label: string }> = [
+  { icon: Leaf, label: "100% Natural" },
+  { icon: FlaskConical, label: "Lab Tested" },
+  { icon: ShieldCheck, label: "Secure Checkout" },
+];
+
+const benefits: Array<{ icon: LucideIcon; label: string }> = [
+  { icon: Sprout, label: "Rich in Nutrients" },
+  { icon: Leaf, label: "Natural Ingredients" },
+  { icon: Sparkles, label: "Daily Wellness" },
+  { icon: Heart, label: "Detox & Cleanse" },
+];
+
+const values: Array<{ icon: LucideIcon; title: string; copy: string }> = [
+  { icon: Leaf, title: "Responsibly Sourced", copy: "Selected from trusted farms" },
+  { icon: Award, title: "Premium Quality", copy: "Carefully processed for nutrition" },
+  { icon: Sprout, title: "Fresh & Natural", copy: "No artificial additives" },
+  { icon: CheckCircle2, title: "Transparent Ingredients", copy: "What you see is what you get" },
+];
+
+const serviceBenefits: Array<{ icon: LucideIcon; label: string }> = [
+  { icon: Truck, label: "Free Shipping" },
+  { icon: ShieldCheck, label: "Secure Payments" },
+  { icon: Headphones, label: "Easy Support" },
+  { icon: RotateCcw, label: "Easy Returns" },
+];
 
 function Hero() {
   return (
@@ -90,14 +118,10 @@ function Hero() {
             </Button>
           </div>
           <div className="mt-6 grid max-w-md grid-cols-3 gap-2 text-center text-[11px] font-medium sm:text-xs">
-            {[
-              [Leaf, "100% Natural"],
-              [FlaskConical, "Lab Tested"],
-              [ShieldCheck, "Secure Checkout"],
-            ].map(([Icon, label]) => (
-              <div key={label as string} className="flex flex-col items-center gap-1.5 sm:flex-row sm:text-left">
+            {heroTrust.map(({ icon: Icon, label }) => (
+              <div key={label} className="flex flex-col items-center gap-1.5 sm:flex-row sm:text-left">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-primary bg-background/80 text-primary"><Icon className="h-5 w-5" /></span>
-                <span>{label as string}</span>
+                <span>{label}</span>
               </div>
             ))}
           </div>
@@ -129,7 +153,7 @@ function Index() {
         <div className="grid grid-cols-3 gap-2.5 sm:gap-5">
           {categories.map((category, i) => (
             <motion.div key={category.name} {...reveal} transition={{ duration: 0.5, delay: i * 0.08 }}>
-              <Link to={category.to} className="group block overflow-hidden rounded-md border bg-card shadow-soft">
+              <Link to="/product/$id" params={{ id: category.id }} className="group block overflow-hidden rounded-md border bg-card shadow-soft">
                 <div className="aspect-[1/0.88] overflow-hidden bg-cream">
                   <img src={category.image} alt={category.name} loading="lazy" width={1024} height={1024} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
@@ -160,10 +184,10 @@ function Index() {
             <Link to="/about">Learn More <ArrowRight /></Link>
           </Button>
           <div className="mt-9 grid max-w-lg grid-cols-4 gap-2">
-            {[[Sprout, "Rich in Nutrients"], [Leaf, "Natural Ingredients"], [Sparkles, "Daily Wellness"], [Heart, "Detox & Cleanse"]].map(([Icon, label]) => (
-              <div key={label as string} className="text-center text-[10px] leading-tight sm:text-xs">
+            {benefits.map(({ icon: Icon, label }) => (
+              <div key={label} className="text-center text-[10px] leading-tight sm:text-xs">
                 <span className="mx-auto mb-2 grid h-11 w-11 place-items-center rounded-full bg-background text-primary"><Icon className="h-5 w-5" /></span>
-                {label as string}
+                {label}
               </div>
             ))}
           </div>
@@ -175,15 +199,10 @@ function Index() {
           <h2 className="text-3xl">Why Green8 Naturals</h2>
           <p className="mt-1 text-sm text-muted-foreground">Pure ingredients. Trusted quality. A healthier tomorrow.</p>
           <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-7 md:grid-cols-4">
-            {[
-              [Leaf, "Responsibly Sourced", "Selected from trusted farms"],
-              [Award, "Premium Quality", "Carefully processed for nutrition"],
-              [Sprout, "Fresh & Natural", "No artificial additives"],
-              [CheckCircle2, "Transparent Ingredients", "What you see is what you get"],
-            ].map(([Icon, title, copy]) => (
-              <div key={title as string} className="flex gap-3 text-left md:flex-col md:items-center md:text-center">
+            {values.map(({ icon: Icon, title, copy }) => (
+              <div key={title} className="flex gap-3 text-left md:flex-col md:items-center md:text-center">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold text-gold"><Icon className="h-5 w-5" /></span>
-                <div><h3 className="font-sans text-sm font-semibold">{title as string}</h3><p className="mt-1 text-xs leading-relaxed text-muted-foreground">{copy as string}</p></div>
+                <div><h3 className="font-sans text-sm font-semibold">{title}</h3><p className="mt-1 text-xs leading-relaxed text-muted-foreground">{copy}</p></div>
               </div>
             ))}
           </div>
@@ -232,8 +251,8 @@ function Index() {
 
       <section className="bg-background px-4 py-9 sm:px-5">
         <div className="mx-auto grid max-w-3xl grid-cols-4 gap-2 text-center text-[10px] font-semibold sm:text-sm">
-          {[[Truck, "Free Shipping"], [ShieldCheck, "Secure Payments"], [Headphones, "Easy Support"], [RotateCcw, "Easy Returns"]].map(([Icon, label]) => (
-            <div key={label as string} className="flex flex-col items-center gap-2"><Icon className="h-7 w-7 text-primary" /><span>{label as string}</span></div>
+          {serviceBenefits.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex flex-col items-center gap-2"><Icon className="h-7 w-7 text-primary" /><span>{label}</span></div>
           ))}
         </div>
       </section>
