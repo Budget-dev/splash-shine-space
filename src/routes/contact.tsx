@@ -26,7 +26,7 @@ const cards = [
   { icon: MessageCircle, t: "WhatsApp", d: "Chat with us", s: "Quick replies" },
 ];
 
-const faqs = [
+const faqs: [string, string][] = [
   ["How can I place an order?", "Add products to your cart and tap Checkout — your order is sent to us on WhatsApp for confirmation."],
   ["Do you offer Cash on Delivery?", "Yes, COD is available across India."],
   ["How long does delivery take?", "Usually 3–7 working days depending on your location."],
